@@ -40,14 +40,32 @@ export default function Book() {
   const [form, setForm] = useState(initialForm);
   const [bookedSlots, setBookedSlots] = useState([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
+  const slotCache = useState({})[0];
 
   const fetchBookedSlots = async (selectedDate) => {
     if (!selectedDate) return;
-    setLoadingSlots(true);
     const dateStr = format(selectedDate, "yyyy-MM-dd");
-    const bookings = await base44.entities.Booking.filter({ preferred_date: dateStr });
-    setBookedSlots(bookings.filter(b => b.status !== "cancelled").map(b => b.preferred_time));
-    setLoadingSlots(false);
+
+    // Return cached result instantly
+    if (slotCache[dateStr] !== undefined) {
+      setBookedSlots(slotCache[dateStr]);
+      return;
+    }
+
+    setLoadingSlots(true);
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 5000);
+      const bookings = await base44.entities.Booking.filter({ preferred_date: dateStr });
+      clearTimeout(timeout);
+      const booked = bookings.filter(b => b.status !== "cancelled").map(b => b.preferred_time);
+      slotCache[dateStr] = booked;
+      setBookedSlots(booked);
+    } catch {
+      setBookedSlots([]);
+    } finally {
+      setLoadingSlots(false);
+    }
   };
 
   const handleDateSelect = (d) => {
@@ -77,13 +95,18 @@ export default function Book() {
 
   const handleSubmit = async () => {
     setLoading(true);
-    const bookingData = {
-      ...form,
-      preferred_date: date ? format(date, "yyyy-MM-dd") : "",
-      status: "pending",
-    };
-    await base44.entities.Booking.create(bookingData);
-    navigate("/booking-confirmed", { state: { booking: bookingData } });
+    try {
+      const bookingData = {
+        ...form,
+        preferred_date: date ? format(date, "yyyy-MM-dd") : "",
+        status: "pending",
+      };
+      await base44.entities.Booking.create(bookingData);
+      navigate("/booking-confirmed", { state: { booking: bookingData } });
+    } catch {
+      setLoading(false);
+      alert("Something went wrong. Please try again or WhatsApp us on 079 806 0310.");
+    }
   };
 
   const slideVariants = {
