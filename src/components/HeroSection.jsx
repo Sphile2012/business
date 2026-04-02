@@ -2,16 +2,19 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export default function HeroSection({ heroImage }) {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt="Beautiful nail art by Bloom Skills &amp; Beauty"
+        <LazyLoadImage
+          src={heroImage.replace(/\.jpg|\.jpeg|\.png/, '.webp')}
+          alt="Beautiful nail art by Bloom Skills & Beauty"
           className="w-full h-full object-cover"
+          effect="blur"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-background/30" />
       </div>

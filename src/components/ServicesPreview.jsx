@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const services = [
   {
@@ -9,7 +11,11 @@ const services = [
     description: "Acrylic, gel, French tips, overlays & stunning designs — from classic to bold.",
     icon: "💅",
     from: "R150",
-    image: "https://media.base44.com/images/public/69c85189646ba632d738f811/c8cd671aa_WhatsAppImage2026-03-29at1611561.jpg",
+    image: <LazyLoadImage
+      src="https://media.base44.com/images/public/69c85189646ba632d738f811/c8cd671aa_WhatsAppImage2026-03-29at1611561.jpg"
+      alt="Nail Services"
+      effect="blur"
+    />,
     link: "/services",
   },
   {
@@ -17,7 +23,11 @@ const services = [
     description: "Cluster lashes, individual lashes & combos for gorgeous, fluttery, dramatic eyes.",
     icon: "🪭",
     from: "R180",
-    image: "https://media.base44.com/images/public/69c85189646ba632d738f811/0e807ad9d_WhatsAppImage2026-03-29at012931.jpeg",
+    image: <LazyLoadImage
+      src="https://media.base44.com/images/public/69c85189646ba632d738f811/0e807ad9d_WhatsAppImage2026-03-29at012931.jpeg"
+      alt="Lash Services"
+      effect="blur"
+    />,
     link: "/services",
   },
   {
@@ -25,7 +35,11 @@ const services = [
     description: "2-week beginner course with certificate, mentorship & training kit included.",
     icon: "💅🎓",
     from: "R2500",
-    image: "https://media.base44.com/images/public/69c85189646ba632d738f811/6c4856f9a_WhatsAppImage2026-03-29at161158.jpg",
+    image: <LazyLoadImage
+      src="https://media.base44.com/images/public/69c85189646ba632d738f811/6c4856f9a_WhatsAppImage2026-03-29at161158.jpg"
+      alt="Nail Course"
+      effect="blur"
+    />,
     link: "/nail-course",
   },
 ];

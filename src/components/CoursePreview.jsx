@@ -2,9 +2,15 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const learnItems = [
-  "Nail shaping",
+  <LazyLoadImage
+    src="/path/to/image.webp"
+    alt="Nail shaping"
+    effect="blur"
+  />, // Example for one item
   "Acrylic application",
   "Nail prepping and fitting",
   "Health and safety precautions",

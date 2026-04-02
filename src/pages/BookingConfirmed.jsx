@@ -30,6 +30,22 @@ export default function BookingConfirmed() {
     `Please find my R100 proof of payment attached. 💳`;
   const whatsappUrl = `https://wa.me/27798060310?text=${encodeURIComponent(whatsappMsg)}`;
 
+  // Utility function to generate time slots
+  function generateTimeSlots(start, end, interval) {
+    const slots = [];
+    let current = start;
+    while (current < end) {
+      const next = new Date(current.getTime() + interval * 60 * 60 * 1000);
+      slots.push(`${current.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${next.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`);
+      current = next;
+    }
+    return slots;
+  }
+
+  // Example usage
+  const timeSlots = generateTimeSlots(new Date('2026-04-02T08:00:00'), new Date('2026-04-02T20:00:00'), 2);
+  console.log(timeSlots);
+
   return (
     <div className="py-16 px-4 sm:px-6 min-h-[80vh] flex items-center justify-center">
       <motion.div
