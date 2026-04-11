@@ -28,6 +28,24 @@ export const allServices = {
     { name: "Charms", price: 5 },
     { name: "Glitter", price: 5 },
   ],
+  "Cluster Lashes": [
+    { name: "Classic", price: 180 },
+    { name: "Hybrid", price: 220 },
+  ],
+  "Individual Lashes": [
+    { name: "Classic", price: 300 },
+    { name: "Hybrid", price: 350 },
+  ],
+  "Lash Combos": [
+    { name: "Plain Hands + Cluster Lashes", price: 320 },
+    { name: "Frenchies + Cluster Lashes", price: 370 },
+    { name: "Plain Hands & Toes + Cluster Lashes", price: 450 },
+    { name: "French Hands & Toes + Cluster Lashes", price: 520 },
+    { name: "Plain Hands + Individuals", price: 420 },
+    { name: "Frenchies + Individuals", price: 450 },
+    { name: "Plain Hands & Toes + Individuals", price: 550 },
+    { name: "French Hands & Toes + Individuals", price: 650 },
+  ],
   "Beginner Nail Course": [
     { name: "2-Week Beginner Course", price: 2500 },
   ],
